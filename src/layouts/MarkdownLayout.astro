@@ -1,0 +1,148 @@
+---
+import "../styles/global.css";
+import "../styles/base.stylus";
+import "@reimujs/aos/dist/aos.css";
+import "baguettebox.js/dist/baguetteBox.min.css";
+import "katex/dist/katex.min.css";
+import "../styles/markdown.stylus";
+
+import { ViewTransitions } from "astro:transitions";
+import { BASE_URL, SITE } from "../utils/config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import AfterFooter from "../components/AfterFooter.astro";
+import Date from "../components/post/Date.astro";
+import Comment from "../components/post/Comment.astro";
+import CommonMeta from "../components/partial/CommonMeta.astro";
+import VendorFont from "../components/partial/VendorFont.astro";
+import VendorScript from "../components/partial/VendorScript.astro";
+import HeaderTitle from "../components/HeaderTitle.astro";
+import ToTop from "../components/ToTop";
+
+type Props = {
+  frontmatter: Record<string, any>;
+};
+
+const { frontmatter } = Astro.props;
+
+const {
+  title,
+  description = "",
+  keywords = "",
+  pubDate,
+  cover = `${BASE_URL}/images/banner.webp`,
+  comment = true,
+  tags = [],
+} = frontmatter;
+---
+
+<!doctype html>
+<html lang={SITE.language}>
+  <head>
+    <script is:inline>
+      (function () {
+        const storedTheme = JSON.parse(
+          window.localStorage.getItem("theme") ?? '"auto"'
+        );
+        let presetTheme;
+        if (storedTheme === "auto") {
+          presetTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+        } else {
+          presetTheme = storedTheme;
+        }
+        if (presetTheme === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+          document.documentElement.style.colorScheme = "dark";
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+          document.documentElement.style.colorScheme = "light";
+        }
+      })();
+    </script>
+    <CommonMeta title={title} description={description} keywords={keywords} />
+    <VendorFont />
+    <VendorScript />
+    <style>
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .hr-line {
+        margin: 10px 35px;
+        opacity: 0.3;
+        height: 4px;
+        background-image: linear-gradient(
+          to right,
+          var(--red-0) 50%,
+          transparent 0%
+        );
+        background-size: 50px 4px;
+        background-repeat: repeat-x;
+        filter: drop-shadow(0px 0px 2px red);
+        transition: opacity 0.3s;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+
+      .article {
+        width: calc(100% - 20px);
+        margin: 0 auto;
+      }
+
+      .article-inner {
+        background: var(--color-wrap);
+        border-radius: 5px;
+        overflow: hidden;
+        transition: 0.3s;
+      }
+
+      .article-meta {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 35px 0;
+      }
+    </style>
+    <ViewTransitions />
+  </head>
+  <body>
+    <Header title={title} cover={cover}>
+      <HeaderTitle title={title} url=`${BASE_URL}/` />
+    </Header>
+    <main>
+      <article
+        class="article"
+        itemprop="blogPost"
+        itemscope
+        itemtype="https://schema.org/BlogPosting"
+        data-aos="fade-up"
+      >
+        <div class="article-inner">
+          <div class="article-meta">
+            <Date
+              pubDate={typeof pubDate === "string"
+                ? new globalThis.Date(pubDate as any)
+                : (pubDate as Date)}
+            />
+          </div>
+          <div class="hr-line"></div>
+          <div class="article-entry" itemprop="articleBody">
+            <slot />
+          </div>
+          <slot name="footer" />
+        </div>
+        <slot name="nav" />
+      </article>
+      <Comment comment={comment} />
+    </main>
+    <Footer />
+    <AfterFooter />
+    <ToTop client:load url={BASE_URL} />
+    <div id="mask" class="hide"></div>
+  </body>
+</html>
