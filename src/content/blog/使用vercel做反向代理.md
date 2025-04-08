@@ -14,19 +14,19 @@ draft: "false"
 
 ### 自行安装
 
-nodejs
+- nodejs
 
 ## 具体步骤
 
 ### 安装vercel-cli
 
-```auto
+```bash
 npm i -g vercel
 ```
 
 ###  登录
 
-```auto
+```bash
 vercel login
 ```
 
@@ -34,7 +34,7 @@ vercel login
 
 新建一个web.json文件并编辑以下内容
 
-```auto
+```json
 {
     "version": 2,
     "routes": [
@@ -45,6 +45,6 @@ vercel login
 
 ###  部署
 
-```auto
+```bash
 vercel -A web.json --prod
 ```

@@ -24,7 +24,6 @@ draft: "false"
 
 脚本中`API_HOST`为memos的API `AUTHORIZATION`为memos中Token `CONTENT_URL`中`111363033003475492`为mastodon的用户的ID 获得用户ID的方法可以参见 
 
-[article id="1469"]
 
 ```bash
 #!/bin/sh
