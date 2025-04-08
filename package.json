@@ -16,7 +16,7 @@
     "@astrojs/react": "^4.2.1",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
-    "@expressive-code/plugin-collapsible-sections": "^0.38.3",
+    "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
