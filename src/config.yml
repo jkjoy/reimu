@@ -1,5 +1,5 @@
 site:
-  url: https://example.com # same as `site` in astro.config.mjs
+  url: https://blog.imsun.org # same as `site` in astro.config.mjs
   title: 提剑追梦
   subtitle: 梦想走过的地方
   description: 曾梦想仗剑走天涯
