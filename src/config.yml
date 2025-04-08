@@ -97,7 +97,12 @@ friend:
     url: https://d-sketon.github.io/
     desc: Main Site with hexo-theme-reimu
     avatar: https://d-sketon.github.io/avatar/avatar.webp
+  - name: 老孙
+    url: https://www.imsun.org
+    desc: 资深网民孙先生
+    avatar: https://img.imsun.org/avatar.jpg
 
+  
 copyright:
   enable: true
   content:
